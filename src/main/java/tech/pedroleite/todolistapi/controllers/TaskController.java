@@ -33,4 +33,10 @@ public class TaskController {
         return ResponseEntity.created(uri).body("Task salva com sucesso.");
     }
 
+    @PutMapping
+    public ResponseEntity<String> updateTask(@RequestBody Task task) {
+        taskService.save(task);
+        return ResponseEntity.ok("Task atualizada com sucesso.");
+    }
+
 }
