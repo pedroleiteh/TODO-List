@@ -1,5 +1,6 @@
 package tech.pedroleite.todolistapi.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -37,6 +38,13 @@ public class TaskController {
     public ResponseEntity<String> updateTask(@RequestBody Task task) {
         taskService.save(task);
         return ResponseEntity.ok("Task atualizada com sucesso.");
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
+        taskService.delete(id);
+
+        return new ResponseEntity<String>("Task deletada com sucesso.", HttpStatus.OK);
     }
 
 }
