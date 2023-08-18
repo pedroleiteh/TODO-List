@@ -23,28 +23,28 @@ public class TaskController {
     @GetMapping
     public ResponseEntity<List<Task>> listAllTasks() {
 
-        return ResponseEntity.ok().body(taskService.findAll());
+        return ResponseEntity.ok().body(taskService.listTasks());
     }
 
     @PostMapping
-    public ResponseEntity<String> saveTask(@RequestBody Task task) {
+    public ResponseEntity<List<Task>> saveTask(@RequestBody Task task) {
         taskService.save(task);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(task.getId()).toUri();
-        return ResponseEntity.created(uri).body("Task salva com sucesso.");
+        return ResponseEntity.created(uri).body(taskService.listTasks());
     }
 
     @PutMapping
-    public ResponseEntity<String> updateTask(@RequestBody Task task) {
+    public ResponseEntity<List<Task>> updateTask(@RequestBody Task task) {
         taskService.save(task);
-        return ResponseEntity.ok("Task atualizada com sucesso.");
+        return ResponseEntity.ok(taskService.listTasks());
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
+    public ResponseEntity<List<Task>> deleteTask(@PathVariable Long id) {
         taskService.delete(id);
 
-        return new ResponseEntity<>("Task deletada com sucesso.", HttpStatus.OK);
+        return ResponseEntity.ok(taskService.listTasks());
     }
 
 }

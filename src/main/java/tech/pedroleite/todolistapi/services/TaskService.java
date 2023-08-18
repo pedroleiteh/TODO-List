@@ -17,18 +17,22 @@ public class TaskService {
     }
 
 
-    public List<Task> findAll() {
+    public List<Task> listTasks() {
         Sort sort = Sort.by("priority").ascending().and(
                 Sort.by("name").ascending()
         );
         return taskRepository.findAll(sort);
     }
 
-    public void save(Task task) {
+    public List<Task> save(Task task) {
+
         taskRepository.save(task);
+        return listTasks();
     }
 
-    public void delete(Long id) {
+    public List<Task> delete(Long id) {
+
         taskRepository.deleteById(id);
+        return listTasks();
     }
 }
