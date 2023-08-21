@@ -1,6 +1,7 @@
 package tech.pedroleite.todolistapi.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import tech.pedroleite.todolistapi.entities.enums.PriorityEnum;
 
 import java.io.Serializable;
@@ -13,7 +14,9 @@ public class Task implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
+    @NotBlank
     private String name;
+    @NotBlank
     private String description;
     private boolean done;
     private PriorityEnum priority;

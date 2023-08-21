@@ -1,5 +1,6 @@
 package tech.pedroleite.todolistapi.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<List<Task>> saveTask(@RequestBody Task task) {
+    public ResponseEntity<List<Task>> saveTask(@RequestBody @Valid Task task) {
         taskService.save(task);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(task.getId()).toUri();
